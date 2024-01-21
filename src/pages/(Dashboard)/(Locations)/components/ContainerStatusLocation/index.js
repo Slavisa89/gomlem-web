@@ -1,0 +1,2 @@
+import ContainerStatusLocation from "./ContainerStatusLocation"
+export default ContainerStatusLocation

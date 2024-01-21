@@ -1,0 +1,71 @@
+import {
+  MapContainer,
+  TileLayer,
+  Tooltip,
+  CircleMarker,
+} from "react-leaflet";
+import "leaflet/dist/leaflet.css";
+
+export default function MapTopCustomer({ dataMap, isPending }) {
+  const svgMarker = {
+    path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+    fillColor: "blue",
+    fillOpacity: 0.6,
+    strokeWeight: 0,
+    rotation: 0,
+    scale: 2,
+    // anchor: new google.maps.Point(15, 30),
+  };
+  let TopLocationOnMap = [];
+  if (!isPending && dataMap) {
+    TopLocationOnMap = dataMap.map((customer, i) => {
+      let count =
+        customer.count >= 1000
+          ? customer.count.toLocaleString()
+          : customer.count;
+
+      return (
+        <CircleMarker
+          key={i}
+          center={[customer.lat, customer.lon]}
+          color={"#fff"}
+          fillColor={"#27272E"}
+          stroke={true}
+          fillOpacity={true}
+          weight={7}
+          icon={svgMarker}
+        >
+          <Tooltip sticky className=" px-[17px] py-[14px] rounded-[20px]">
+            <div className="flex flex-col">
+              <span className="text-base font-semibold text-text-lighter">
+                {customer.name}
+              </span>
+              <span className="text-sm text-gary">{count} total customers</span>
+            </div>
+          </Tooltip>
+        </CircleMarker>
+      );
+    });
+  }
+
+  return (
+    <div>
+      <MapContainer
+        style={{ width: "100%", height: "374px", zIndex: "10" }}
+        zoom={1.5}
+        center={[25.505, -0.09]}
+        scrollWheelZoom={false}
+        fadeAnimation={true}
+        markerZoomAnimation={true}
+      >
+        <TileLayer
+          attribution='<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url={`https://tile.jawg.io/dc1e7b1c-2d05-4045-9c6b-6d5c384000a9/{z}/{x}/{y}{r}.png?access-token=${
+            import.meta.env.VITE_REACT_APP_ACCESS_TOKEN_MAP
+          }`}
+        />
+        {TopLocationOnMap}
+      </MapContainer>
+    </div>
+  );
+}
