@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import StatusBox from '@components/StatusBox';
-import Statistics from '@components/Statistics';
-import Table from '@components/NewTable';
-import Thead from '@components/NewTable/Thead';
-import Tbody from '@components/NewTable/Tbody';
-import TrowAdReports from '@components/NewTable/TRowAdReports';
-import useTripsData from '@hooks/useTripsData';
-import { faker } from '@faker-js/faker';
-import TopLocations from './components/TopLocations';
+import React, { useState } from "react";
+import StatusBox from "@components/StatusBox";
+import Statistics from "@components/Statistics";
+import Table from "@components/NewTable";
+import Thead from "@components/NewTable/Thead";
+import Tbody from "@components/NewTable/Tbody";
+import TrowAdReports from "@components/NewTable/TRowAdReports";
+import useTripsData from "@hooks/useTripsData";
+import { faker } from "@faker-js/faker";
+import TopLocations from "./components/TopLocations";
 
 export default function AdReports() {
-  const [dataMode, setDataMode] = useState('monthlyData');
+  const [dataMode, setDataMode] = useState("monthlyData");
   function handlerDataMode(data) {
     setDataMode(data);
   }
@@ -23,22 +23,22 @@ export default function AdReports() {
   } = useTripsData();
 
   const dataHead = [
-    'Customer name',
-    'Date Paid',
-    'Company Name',
-    'Locations Targeted',
-    'Amount Paid',
-    'Ad Reports',
+    "Customer name",
+    "Date Paid",
+    "Company Name",
+    "Locations Targeted",
+    "Amount Paid",
+    "Ad Reports",
   ];
 
   const dummy = [
     {
-      id: '0714c4c5-b1f0-40bf-950d-a651d75f4c4e',
-      fullName: 'Slavisa Test',
-      country: 'USA',
-      amountPaid: '5,000$',
-      companyName: 'Telegram',
-      registeredOn: '2023-12-14T10:33:34.1148514',
+      id: "0714c4c5-b1f0-40bf-950d-a651d75f4c4e",
+      fullName: "Slavisa Test",
+      country: "USA",
+      amountPaid: "5,000$",
+      companyName: "Telegram",
+      registeredOn: "2023-12-14T10:33:34.1148514",
       tripsCount: 7,
     },
   ];
@@ -48,11 +48,11 @@ export default function AdReports() {
   if (!tripsPending && !tripsError) {
     dataFromApi = [
       {
-        label: 'Trips',
+        label: "Trips",
         data: trips?.tripsChartsData[dataMode],
       },
       {
-        label: 'Subscriptions',
+        label: "Subscriptions",
         data: trips?.tripsChartsData[dataMode].map((item) => {
           return {
             name: item.name,

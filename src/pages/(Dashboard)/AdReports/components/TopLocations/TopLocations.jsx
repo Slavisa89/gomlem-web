@@ -89,17 +89,21 @@ export default function TopLocations({ isPending = false }) {
       <AnimBox
         y={200}
         time={8}
-        isOpen={true}
+        isOpen={activeModal}
         className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[643px]">
         <div className="flex flex-col font-semibold bg-white rounded-3xl">
           <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
             <span>Add Location</span>
             <div className="flex gap-2">
-              <CloseButton closeFn={handlerModal} />
+              <CloseButton closeFn={() => handlerModal(false)} />
             </div>
           </div>
-          <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
-          <Chart dataFromApi={dataFromApi} />
+          <div className="p-10">
+            <div className="mb-6">
+              <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
+            </div>
+            <Chart dataFromApi={dataFromApi} className="mt-6" />
+          </div>
         </div>
       </AnimBox>
     </div>
