@@ -17,6 +17,7 @@ export default function Statistics() {
   function handlerDataMode(data) {
     setDataMode(data);
   }
+// TODO: try to improve following
   let dataFromApi = [];
   if (!tripsPending && !tripsError) {
     dataFromApi = [
