@@ -1,6 +1,6 @@
 import ReactApexChart from "react-apexcharts";
 
-export default function MiniLocationChart({ datasApi }) {
+export default function LocationReportChart({ datasApi }) {
   const datas = [];
   const labels = [];
   datasApi.forEach((item) => {
@@ -13,45 +13,27 @@ export default function MiniLocationChart({ datasApi }) {
       fontFamily: "Inter",
       type: "area",
       toolbar: {
-        tools: {
-          download: false,
-          selection: false,
-          zoom: true,
-          zoomin: true,
-          zoomout: true,
-          pan: true,
-          reset: true,
-          customIcons: [],
-        },
+        show: false,
       },
     },
-    colors: ["#26A86F"],
-    fill: {
-      colors: "#fff",
-      opacity: 0.5,
-      type: "gradient",
-      gradient: {
-        shade: "light",
-        type: "vertical",
-        shadeIntensity: 1,
-        gradientToColors: ["#26A86F60", "#ffffff"],
-        inverseColors: true,
-        opacityFrom: 1,
-        opacityTo: 0,
-        stops: [0, 100],
-      },
-    },
+    colors: ["#4C6FFF"],
     dataLabels: {
       enabled: false,
     },
     stroke: {
-      colors: ["#26A86F"],
+      colors: ["#4C6FFF"],
       curve: "smooth",
-      width: 1,
+      width: 2,
     },
     // Send Labels
     xaxis: {
       categories: labels,
+      axisBorder: {
+        show: false
+      },
+      axisTicks: {
+        show: false
+      },
       labels: {
         style: {
           colors: "#8492A6",
@@ -63,7 +45,7 @@ export default function MiniLocationChart({ datasApi }) {
     },
     markers: {
       strokeColors: "#fff",
-      colors: "#26A86F",
+      colors: "#4C6FFF",
     },
     yaxis: {
       show: false,
@@ -91,7 +73,7 @@ export default function MiniLocationChart({ datasApi }) {
     <ReactApexChart
       options={options}
       series={series}
-      type="area"
+      type="line"
       height={153}
     />
   );
