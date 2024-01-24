@@ -37,7 +37,9 @@ export default function ContainerBoxs() {
           isPending={helpRequestsInfoPending || helpRequestsInfoError}
           number={helpRequestsInfoData?.activeEmergencyRequests}
           // fnView={handlerActiveModalActiveEmergency}
-          fnView={()=>{alert("help Request Emergency")}}
+          fnView={() => {
+            alert("help Request Emergency");
+          }}
           typeModal="ActiveEmergencyRequests"
         />
       </FadeListItem>

@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import StatusBox from "@components/StatusBox";
 
 export function StatusBoxContainer() {
+  const [activeModalSetting, setActiveModalSetting] = useState(false);
+  function handlerActiveModalSetting(nameModal) {
+    setActiveModalSetting(nameModal);
+  }
+
   return (
     <div className="flex gap-[26px]">
       <StatusBox
@@ -28,6 +33,8 @@ export function StatusBoxContainer() {
         icon="setting"
         title="Ad Report Settings"
         fnViewTitle="View And Edit"
+        fnView={handlerActiveModalSetting}
+        typeModal="Ad Report Settings"
       />
     </div>
   );

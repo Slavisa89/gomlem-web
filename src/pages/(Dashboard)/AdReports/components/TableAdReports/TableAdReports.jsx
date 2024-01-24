@@ -1,7 +1,9 @@
+import React, { useState } from "react";
 import Table from "@components/NewTable";
 import Thead from "@components/NewTable/Thead";
 import Tbody from "@components/NewTable/Tbody";
 import TrowAdReports from "@components/NewTable/TRowAdReports";
+import SelectChart from "@components/SelectChart";
 
 const dummy = [
   {
@@ -25,9 +27,18 @@ const dataHead = [
 ];
 
 export default function TableAdReports({ isPending }) {
+  const [dataMode, setDataMode] = useState("monthlyData");
+
+  function handlerDataMode(data) {
+    setDataMode(data);
+  }
+
   return (
     <>
-      <span className="text-xl font-semibold">Advertises</span>
+      <div className="mt-6 mb-6 flex items-center mb-16">
+        <span className="font-semibold text-[28px] mr-6">Advertises</span>
+        <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
+      </div>
       <Table typeTable="helpRequests">
         <Thead dataHead={dataHead} />
         <Tbody isPending={false}>

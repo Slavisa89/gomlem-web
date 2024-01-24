@@ -30,6 +30,7 @@ export default function TopLocations({ isPending = false }) {
     // tripsMessageError,
     tripsError,
   } = useTripsData();
+
   function handlerDataMode(data) {
     setDataMode(data);
   }
@@ -113,12 +114,14 @@ export default function TopLocations({ isPending = false }) {
             <div className="mb-6">
               <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
             </div>
-            <MiniLocationChart
-              datasApi={customersInfoData.newCustomersChartsData[dataMode]}
-            />
-            <MiniLocationChart
-              datasApi={customersInfoData.newCustomersChartsData[dataMode]}
-            />
+            <div className="row d-flex">
+              <MiniLocationChart
+                datasApi={customersInfoData.newCustomersChartsData[dataMode]}
+              />
+              <MiniLocationChart
+                datasApi={customersInfoData.newCustomersChartsData[dataMode]}
+              />
+            </div>
           </div>
         </div>
       </AnimBox>

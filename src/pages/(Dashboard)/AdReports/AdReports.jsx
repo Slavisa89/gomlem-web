@@ -7,7 +7,7 @@ import TableAdReports from "./components/TableAdReports/TableAdReports";
 export default function AdReports() {
   return (
     <div className="overflow-y-scroll h-[calc(100vh-112px)]">
-      <div className="py-9 pl-11 pr-[70px] flex gap-[35px]">
+      <div className="py-9 pl-11 pr-[30px] flex gap-[35px]">
         <main className="w-[70%]">
           <StatusBoxContainer />
           <Statistics />
