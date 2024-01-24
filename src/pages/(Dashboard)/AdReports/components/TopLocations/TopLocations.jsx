@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import Chart from '@/components/Statistics/Chart';
-import SelectChart from '@components/SelectChart';
-import BoxSkeleton from '@skeleton/BoxSkeleton';
-import AnimBox from '@animation/AnimBox';
-import { faker } from '@faker-js/faker';
-import useTripsData from '@hooks/useTripsData';
-import Icon from '@components/Icon';
-import CloseButton from '@components/CloseButton';
+import { useMemo, useState } from "react";
+import Chart from "@/components/Statistics/Chart";
+import SelectChart from "@components/SelectChart";
+import BoxSkeleton from "@skeleton/BoxSkeleton";
+import AnimBox from "@animation/AnimBox";
+import { faker } from "@faker-js/faker";
+import useTripsData from "@hooks/useTripsData";
+import Icon from "@components/Icon";
+import CloseButton from "@components/CloseButton";
 
 export default function TopLocations({ isPending = false }) {
-  const [dataMode, setDataMode] = useState('monthlyData');
+  const [dataMode, setDataMode] = useState("monthlyData");
 
   const [activeModal, setActiveModal] = useState(false);
   function handlerModal(id = false) {
@@ -26,37 +26,38 @@ export default function TopLocations({ isPending = false }) {
     setDataMode(data);
   }
   // TODO: try to improve following
-  let dataFromApi = [];
-  if (!tripsPending && !tripsError) {
-    dataFromApi = [
+
+  const dataFromApi = useMemo(() => {
+    return [
       {
-        label: 'Trips',
-        data: trips?.tripsChartsData[dataMode],
+        label: "Trips",
+        data: trips?.tripsChartsData[dataMode] || [],
       },
       {
-        label: 'Subscriptions',
-        data: trips?.tripsChartsData[dataMode].map((item) => {
-          return {
-            name: item.name,
-            value: item.value + faker.number.int({ min: 0, max: 5 }),
-          };
-        }),
+        label: "Subscriptions",
+        data:
+          trips?.tripsChartsData[dataMode].map((item) => {
+            return {
+              name: item.name,
+              value: item.value + faker.number.int({ min: 0, max: 5 }),
+            };
+          }) || [],
       },
     ];
-  }
+  }, [trips, dataMode]);
 
   const topLocationList = [
     {
-      name: 'Brooklyn',
-      totalAdSpent: '20.000',
+      name: "Brooklyn",
+      totalAdSpent: "20.000",
     },
     {
-      name: 'London',
-      totalAdSpent: '20.000',
+      name: "London",
+      totalAdSpent: "20.000",
     },
     {
-      name: 'Zvornik',
-      totalAdSpent: '20.000',
+      name: "Zvornik",
+      totalAdSpent: "20.000",
     },
   ];
 
@@ -89,11 +90,12 @@ export default function TopLocations({ isPending = false }) {
       <AnimBox
         y={200}
         time={8}
-        isOpen={true}
-        className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[643px]">
+        isOpen={activeModal}
+        className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[643px]"
+      >
         <div className="flex flex-col font-semibold bg-white rounded-3xl">
           <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
-            <span>Add Location</span>
+            <span>Top Performing Locations</span>
             <div className="flex gap-2">
               <CloseButton closeFn={handlerModal} />
             </div>
