@@ -1,20 +1,28 @@
-import { useState } from 'react';
-import Chart from '@/components/Statistics/Chart';
-import SelectChart from '@components/SelectChart';
-import BoxSkeleton from '@skeleton/BoxSkeleton';
-import AnimBox from '@animation/AnimBox';
-import { faker } from '@faker-js/faker';
-import useTripsData from '@hooks/useTripsData';
-import Icon from '@components/Icon';
-import CloseButton from '@components/CloseButton';
+import { useState } from "react";
+import SelectChart from "@components/SelectChart";
+import BoxSkeleton from "@skeleton/BoxSkeleton";
+import AnimBox from "@animation/AnimBox";
+import { faker } from "@faker-js/faker";
+import useTripsData from "@hooks/useTripsData";
+import Icon from "@components/Icon";
+import CloseButton from "@components/CloseButton";
+import MiniLocationChart from "../MiniLocationChart";
+import useCustomerInfoData from "@hooks/useCustomerInfoData";
 
 export default function TopLocations({ isPending = false }) {
-  const [dataMode, setDataMode] = useState('monthlyData');
+  const [dataMode, setDataMode] = useState("monthlyData");
 
   const [activeModal, setActiveModal] = useState(false);
   function handlerModal(id = false) {
     setActiveModal(id);
   }
+
+  const {
+    customersInfoData,
+    customersInfoPending,
+    customersInfoError,
+    // customersInfoMessageError,
+  } = useCustomerInfoData();
 
   const {
     tripsPending,
@@ -25,16 +33,16 @@ export default function TopLocations({ isPending = false }) {
   function handlerDataMode(data) {
     setDataMode(data);
   }
-  // TODO: try to improve following
+
   let dataFromApi = [];
   if (!tripsPending && !tripsError) {
     dataFromApi = [
       {
-        label: 'Trips',
+        label: "Trips",
         data: trips?.tripsChartsData[dataMode],
       },
       {
-        label: 'Subscriptions',
+        label: "Subscriptions",
         data: trips?.tripsChartsData[dataMode].map((item) => {
           return {
             name: item.name,
@@ -47,16 +55,19 @@ export default function TopLocations({ isPending = false }) {
 
   const topLocationList = [
     {
-      name: 'Brooklyn',
-      totalAdSpent: '20.000',
+      name: "Brooklyn",
+      totalAdSpent: "20.000",
+      data: customersInfoData.newCustomersChartsData[dataMode],
     },
     {
-      name: 'London',
-      totalAdSpent: '20.000',
+      name: "London",
+      totalAdSpent: "20.000",
+      data: customersInfoData.newCustomersChartsData[dataMode],
     },
     {
-      name: 'Zvornik',
-      totalAdSpent: '20.000',
+      name: "Zvornik",
+      totalAdSpent: "20.000",
+      data: customersInfoData.newCustomersChartsData[dataMode],
     },
   ];
 
@@ -74,15 +85,15 @@ export default function TopLocations({ isPending = false }) {
       {tripsPending || tripsError ? (
         <BoxSkeleton height={400} />
       ) : (
-        topLocationList.map((locationItem) => (
-          <div className="">
+        topLocationList.map((locationItem, i) => (
+          <div key={i}>
             <div className="flex justify-between">
               <span className="font-semibold">{locationItem.name}</span>
               <span className="font-semibold">
                 ${locationItem.totalAdSpent} total ad spent
               </span>
             </div>
-            <Chart dataFromApi={dataFromApi} />
+            <MiniLocationChart datasApi={locationItem.data} />
           </div>
         ))
       )}
@@ -102,7 +113,12 @@ export default function TopLocations({ isPending = false }) {
             <div className="mb-6">
               <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
             </div>
-            <Chart dataFromApi={dataFromApi} className="mt-6" />
+            <MiniLocationChart
+              datasApi={customersInfoData.newCustomersChartsData[dataMode]}
+            />
+            <MiniLocationChart
+              datasApi={customersInfoData.newCustomersChartsData[dataMode]}
+            />
           </div>
         </div>
       </AnimBox>

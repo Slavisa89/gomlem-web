@@ -2,6 +2,7 @@ import ButtonsSendMessage from "./components/ButtonsSendMessage";
 import SideBar from "./components/SideBar";
 import TopCustomerLocations from "./components/TopCustomerLocations";
 import CustomerList from "./components/CustomerList";
+
 export default function Customers() {
   return (
     <>
