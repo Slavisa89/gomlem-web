@@ -4,6 +4,16 @@ import Thead from "@components/NewTable/Thead";
 import Tbody from "@components/NewTable/Tbody";
 import TrowAdReports from "@components/NewTable/TRowAdReports";
 import SelectChart from "@components/SelectChart";
+import useAdReportsTable from "@hooks/useAdReportsTable";
+
+const dataHead = [
+  "Customer name",
+  "Date Paid",
+  "Company Name",
+  "Locations Targeted",
+  "Amount Paid",
+  "Ad Reports",
+];
 
 const dummy = [
   {
@@ -17,21 +27,15 @@ const dummy = [
   },
 ];
 
-const dataHead = [
-  "Customer name",
-  "Date Paid",
-  "Company Name",
-  "Locations Targeted",
-  "Amount Paid",
-  "Ad Reports",
-];
-
-export default function TableAdReports({ isPending }) {
+export default function TableAdReports() {
   const [dataMode, setDataMode] = useState("monthlyData");
 
   function handlerDataMode(data) {
     setDataMode(data);
   }
+
+  const { adReportsTableData, adReportsTablePending, adReportsTableError } =
+    useAdReportsTable();
 
   return (
     <>
@@ -41,9 +45,9 @@ export default function TableAdReports({ isPending }) {
       </div>
       <Table typeTable="helpRequests">
         <Thead dataHead={dataHead} />
-        <Tbody isPending={false}>
-          {!isPending &&
-            dummy.map((dataRow, i) => {
+        <Tbody isPending={adReportsTablePending}>
+          {!adReportsTablePending &&
+            adReportsTableData.map((dataRow, i) => {
               return (
                 <TrowAdReports
                   key={i}
