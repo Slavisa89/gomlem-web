@@ -10,7 +10,7 @@ export default function LineStatus({
     orange: { bgLine: "bg-red-200", colorLine: "bg-red-300" },
     green: { bgLine: "bg-light-300", colorLine: "bg-green-100" },
     gary: { bgLine: "bg-light-100", colorLine: "bg-gary" },
-    blue: { bgLine: "bg-light-300", colorLine: "bg-[#4C6FFF]" },
+    blue: { bgLine: "bg-light-100", colorLine: "bg-[#4C6FFF]" },
   };
   const [lineWidth, setLineWidth] = useState(0);
   const color = themes[theme];

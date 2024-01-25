@@ -1,6 +1,8 @@
 import React from "react";
 import LineStatus from "@components/LineStatus/LineStatus";
 import PerformanceBox from "../../PerformanceBox";
+import Toggle from "@components/Toggle/Toggle";
+import { Link } from "react-router-dom";
 
 const fakeImpressionCount = 30.0;
 const fakeLocationList = [
@@ -51,17 +53,42 @@ export default function ModalAdReport() {
           </div>
         </li>
         <li>
-          <span className="font-semibold">Ad Performance</span>
+          <div className="mb-6">
+            <span className="font-semibold">Ad Performance</span>
+          </div>
           {fakeLocationList.map((locationItem, i) => {
             return (
-              <PerformanceBox
-                key={i}
-                locationName={locationItem.name}
-                impressionCount={locationItem.impressions}
-                clicksCount={locationItem.clicks}
-              />
+              <div className="mb-8" key={i}>
+                <PerformanceBox
+                  locationName={locationItem.name}
+                  impressionCount={locationItem.impressions}
+                  clicksCount={locationItem.clicks}
+                />
+              </div>
             );
           })}
+        </li>
+        <li>
+          <div className="flex items-center justify-between">
+            <span className="w-[230px] font-semibold">
+              Automatically Send Report
+            </span>
+            <Toggle>
+              <input type="checkbox" className="sr-only peer" />
+            </Toggle>
+          </div>
+          <Link
+            to="/setting"
+            className="flex gap-[13px] text-text-lighter font-normal justify-end mt-4 underline underline-offset-4">
+            <span className="">Go to settings</span>
+          </Link>
+        </li>
+        <li className="mt-6 mb-6">
+          <button className="items-center justify-center w-full _btn-small _btn-outline rounded-2xl">
+            <span className="text-text text-[14px] font-semibold">
+              Send A Message
+            </span>
+          </button>
         </li>
       </ul>
     </div>
