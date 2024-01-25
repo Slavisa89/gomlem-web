@@ -1,29 +1,41 @@
-import React from "react";
+import React, { useMemo } from "react";
 import LineStatus from "@components/LineStatus/LineStatus";
 import PerformanceBox from "../../PerformanceBox";
 import Toggle from "@components/Toggle/Toggle";
 import { Link } from "react-router-dom";
+import IconCompany from "@assets/imgs/telegram.svg";
 
-const fakeImpressionCount = 30.0;
 const fakeLocationList = [
   {
     name: "Brooklyn",
-    impressions: "15000",
+    impressions: 15000,
     clicks: 800,
   },
   {
     name: "Manhattan",
-    impressions: "15000",
+    impressions: 15000,
     clicks: 800,
   },
 ];
 export default function ModalAdReport() {
+  const totalImpressions = useMemo(
+    () =>
+      fakeLocationList.reduce((total, location) => {
+        return total + location.impressions;
+      }, 0),
+    [],
+  );
+
   return (
-    <div className="px-[22px] py-6 pl-9 bg-white w-[393px] h-[550px] rounded-b-[20px] overflow-y-scroll">
+    <div className="px-[22px] pl-9 bg-white w-[393px] h-[630px] rounded-b-[20px] overflow-y-scroll">
       <ul className="flex flex-col gap-5 text-sm font-normal">
         <li>
           <div className="mt-4">
             <div className="flex flex-col gap-4">
+              <div className="flex gap-[10px] items-center">
+                <img src={IconCompany} className="rounded-lg" />
+                <span>Telegram</span>
+              </div>
               <span className="w-[230px] font-semibold">Campaign Duration</span>
               <div className="flex flex-row gap-2">
                 <LineStatus
@@ -32,7 +44,7 @@ export default function ModalAdReport() {
                   className="h-2 w-[135px] inline"
                   withLabelValue={false}
                 />
-                <small className="inline">{`${fakeImpressionCount} impressions`}</small>
+                <small className="inline">{`${totalImpressions.toLocaleString()} impressions`}</small>
               </div>
             </div>
           </div>
@@ -61,8 +73,8 @@ export default function ModalAdReport() {
               <div className="mb-8" key={i}>
                 <PerformanceBox
                   locationName={locationItem.name}
-                  impressionCount={locationItem.impressions}
-                  clicksCount={locationItem.clicks}
+                  impressionCount={locationItem.impressions.toLocaleString()}
+                  clicksCount={locationItem.clicks.toLocaleString()}
                 />
               </div>
             );

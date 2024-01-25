@@ -21,7 +21,7 @@ export default function TrowAdReports({ body, onViewReportClick }) {
           <span>{fullName}</span>
         </div>
 
-        <div className="flex gap-[10px] items-center">
+        <div className="flex gap-[10px] items-start">
           <div>{formatDate}</div>
         </div>
         <div className="flex gap-[10px] items-center">
@@ -29,9 +29,9 @@ export default function TrowAdReports({ body, onViewReportClick }) {
           <span>{companyName}</span>
         </div>
         <div>
-          <div>{country}</div>
+          <span>{country}</span>
         </div>
-        <div>{amountPaid}</div>
+        <div className="text-blue-800">{amountPaid.toLocaleString()}</div>
         <div>
           <button onClick={onViewReportClick}>View Report</button>
         </div>

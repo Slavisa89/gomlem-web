@@ -8,10 +8,16 @@ import CloseButton from "@components/CloseButton";
 import LocationReportChartBox from "../LocationReportChartBox";
 import useCustomerInfoData from "@hooks/useCustomerInfoData";
 import SearchBox from "@components/SearchBox";
+import ModalChart from "@components/NewCustomersChart/ModalChart";
 
 export default function TopLocations() {
   const [dataMode, setDataMode] = useState("monthlyData");
   const [searchArea, setSearchArea] = useState("");
+  const [isActiveModalChart, setIsActiveModalChart] = useState(false);
+
+  function handlerActiveModal() {
+    setIsActiveModalChart(!isActiveModalChart);
+  }
 
   const [activeModal, setActiveModal] = useState(false);
   function handlerModal(id = false) {
@@ -23,6 +29,7 @@ export default function TopLocations() {
   }
 
   function handlerSubmit() {
+    handlerActiveModal();
     console.log(searchArea);
   }
 
@@ -127,6 +134,18 @@ export default function TopLocations() {
           )}
         </div>
       </AnimBox>
+      {customersInfoPending || customersInfoError ? null : (
+        <AnimBox
+          y={200}
+          time={8}
+          isOpen={isActiveModalChart}
+          className="fixed bottom-14 shadow-boo-1 right-[70px] z-20">
+          <ModalChart
+            handlerActiveModal={handlerActiveModal}
+            dataChart={customersInfoData.newCustomersChartsData}
+          />
+        </AnimBox>
+      )}
     </div>
   );
 }
