@@ -5,6 +5,7 @@ import Tbody from "@components/NewTable/Tbody";
 import TrowAdReports from "@components/NewTable/TRowAdReports";
 import useAdReportsTable from "@hooks/useAdReportsTable";
 import SelectTable from "@components/SelectTable";
+import ModalAdReport from "@modals/ModalAdReport";
 
 const dataHead = [
   "Customer name",
@@ -17,6 +18,11 @@ const dataHead = [
 
 export default function TableAdReports() {
   const [dataMode, setDataMode] = useState("monthlyData");
+  const [activeModal, setActiveModal] = useState(false);
+
+  function handlerActiveModal() {
+    setActiveModal(!activeModal);
+  }
 
   function handlerDataMode(data) {
     setDataMode(data);
@@ -27,7 +33,7 @@ export default function TableAdReports() {
 
   return (
     <>
-      <div className="mt-6 mb-6 flex items-center mb-16">
+      <div className="mt-6 flex items-center mb-16">
         <span className="font-semibold text-[28px] mr-6">Advertises</span>
         <SelectTable mode={dataMode} handlerDataMode={handlerDataMode} />
       </div>
@@ -46,6 +52,10 @@ export default function TableAdReports() {
             })}
         </Tbody>
       </Table>
+      <ModalAdReport
+        activeModal={activeModal}
+        handlerActiveModal={handlerActiveModal}
+      />
     </>
   );
 }
