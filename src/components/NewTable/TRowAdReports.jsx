@@ -3,15 +3,9 @@ import { convertDateFormat } from "@/script/script";
 import FadeOnScreen from "@animation/FadeOnScreen";
 import IconCompany from "@assets/imgs/telegram.svg";
 
-export default function TrowAdReports({ body }) {
-  const {
-    media,
-    fullName,
-    amountPaid,
-    companyName,
-    registeredOn,
-    country,
-  } = body;
+export default function TrowAdReports({ body, onViewReportClick }) {
+  const { media, fullName, amountPaid, companyName, registeredOn, country } =
+    body;
 
   const imgSrc = `data:image/gif;base64,${media}`;
   const formatDate = convertDateFormat(registeredOn);
@@ -31,14 +25,16 @@ export default function TrowAdReports({ body }) {
           <div>{formatDate}</div>
         </div>
         <div className="flex gap-[10px] items-center">
-        <img src={IconCompany} className="rounded-lg" />
+          <img src={IconCompany} className="rounded-lg" />
           <span>{companyName}</span>
         </div>
         <div>
-        <div>{country}</div>
+          <div>{country}</div>
         </div>
         <div>{amountPaid}</div>
-        <div><button>View Report</button></div>
+        <div>
+          <button onClick={onViewReportClick}>View Report</button>
+        </div>
       </li>
     </FadeOnScreen>
   );

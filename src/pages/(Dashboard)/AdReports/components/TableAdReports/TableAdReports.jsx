@@ -45,8 +45,9 @@ export default function TableAdReports() {
               return (
                 <TrowAdReports
                   key={i}
-                  handlerActiveId={() => true}
+                  handlerActiveId={(val) => console.log(">onRow click", val)}
                   body={dataRow}
+                  onViewReportClick={handlerActiveModal}
                 />
               );
             })}
