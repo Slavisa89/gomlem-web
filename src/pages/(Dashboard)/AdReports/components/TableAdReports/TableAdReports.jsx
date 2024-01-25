@@ -3,8 +3,8 @@ import Table from "@components/NewTable";
 import Thead from "@components/NewTable/Thead";
 import Tbody from "@components/NewTable/Tbody";
 import TrowAdReports from "@components/NewTable/TRowAdReports";
-import SelectChart from "@components/SelectChart";
 import useAdReportsTable from "@hooks/useAdReportsTable";
+import SelectTable from "@components/SelectTable";
 
 const dataHead = [
   "Customer name",
@@ -13,18 +13,6 @@ const dataHead = [
   "Locations Targeted",
   "Amount Paid",
   "Ad Reports",
-];
-
-const dummy = [
-  {
-    id: "0714c4c5-b1f0-40bf-950d-a651d75f4c4e",
-    fullName: "Slavisa Test",
-    country: "USA",
-    amountPaid: "5,000$",
-    companyName: "Telegram",
-    registeredOn: "2023-12-14T10:33:34.1148514",
-    tripsCount: 7,
-  },
 ];
 
 export default function TableAdReports() {
@@ -41,9 +29,9 @@ export default function TableAdReports() {
     <>
       <div className="mt-6 mb-6 flex items-center mb-16">
         <span className="font-semibold text-[28px] mr-6">Advertises</span>
-        <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
+        <SelectTable mode={dataMode} handlerDataMode={handlerDataMode} />
       </div>
-      <Table typeTable="helpRequests">
+      <Table typeTable="adReports">
         <Thead dataHead={dataHead} />
         <Tbody isPending={adReportsTablePending}>
           {!adReportsTablePending &&

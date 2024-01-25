@@ -4,11 +4,11 @@ import SelectChart from "@components/SelectChart";
 import CloseButton from "@components/CloseButton";
 import ChartInModal from "./ChartInModal";
 import SearchBox from "@components/SearchBox";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function ModalChart({ handlerActiveModal, dataChart }) {
-  const {pathname}  = useLocation();
+  const { pathname } = useLocation();
   const [dataMode, setDataMode] = useState("weeklyData");
   function handlerDataMode(date) {
     setDataMode(date);
@@ -41,7 +41,7 @@ export default function ModalChart({ handlerActiveModal, dataChart }) {
           <div className="flex items-center justify-between mb-16">
             <span>Statistics</span>
             <SelectChart mode={dataMode} handlerDataMode={handlerDataMode} />
-            {pathname=="/customers" && (
+            {pathname == "/customers" && (
               <SearchBox
                 searchBoxHandler={{
                   searchInput: searchArea,
@@ -51,7 +51,7 @@ export default function ModalChart({ handlerActiveModal, dataChart }) {
                   className: "py-2",
                 }}
               />
-            )} 
+            )}
           </div>
           <ChartInModal datasApi={dataChart[dataMode]} typeChart={dataMode} />
         </div>
