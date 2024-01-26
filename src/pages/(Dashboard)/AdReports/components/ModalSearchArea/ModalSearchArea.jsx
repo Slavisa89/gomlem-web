@@ -29,7 +29,7 @@ export default function ModalSearchArea({ handlerActiveModal, locationItem }) {
   return (
     <>
       <div className="flex bg-white rounded-3xl w-[341px] h-[392px] flex-col font-semibold">
-        <div className="flex justify-between py-3 pl-8 pt-[15px] pr-[14px] rounded-t-3xl text-white items-center bg-text">
+        <div className="flex justify-between py-3 pl-8 pt-[12px] pr-[14px] rounded-t-3xl text-white items-center bg-text">
           <span>Search Area</span>
           <CloseButton closeFn={handlerActiveModal} />
         </div>

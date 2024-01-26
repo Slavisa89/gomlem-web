@@ -20,7 +20,7 @@ export default function ModalAdReportsSettings() {
   }
 
   return (
-    <div className="px-[22px] py-6 pl-9 bg-white w-[393px] h-[550px] rounded-b-[20px] overflow-y-scroll">
+    <div className="px-[22px] py-3 pl-9 bg-white w-[393px] h-[300px] rounded-b-[20px] overflow-y-scroll">
       <ul className="flex flex-col gap-5 text-sm font-normal">
         <li>
           <div className="mt-4">
@@ -58,8 +58,7 @@ export default function ModalAdReportsSettings() {
                   modalName: "Modal Create Report Template",
                   category: "Medium",
                 })
-              }
-            >
+              }>
               <Icon name="add" className="w-[10px] h-[10px]" />
               <span>Create Report Template</span>
             </button>
