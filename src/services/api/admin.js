@@ -80,3 +80,6 @@ export const replies = async (replyId) =>
   await instance.get(`/Admin/HelpRequests/reply/${replyId}`, {
     params: { replyId: replyId, page: 1, size: 100 },
   });
+
+// TODO: check for correct end point
+export const adReportsData = async () => await instance.get("/Admin/AdReports");

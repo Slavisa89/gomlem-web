@@ -18,7 +18,7 @@ import setting from "./lc_setting.svg";
 import dollar from "./dollar.svg";
 import person from "./person.svg";
 import persons from "./persons.svg";
-import googleIcon from "./googleIcon.svg"
+import googleIcon from "./googleIcon.svg";
 import message from "./message.svg";
 import world from "./Ic_world.svg";
 import card from "./Ic_credit card.svg";
@@ -26,7 +26,7 @@ import edit from "./edit.svg";
 import phone2 from "./phone2.svg";
 import location3 from "./location3.svg";
 import bag from "./lc-bag.svg";
-import visit from "./visit.svg"
+import visit from "./visit.svg";
 import arrowRight from "./arrow_right.svg";
 import arrow2 from "./arrow2.svg";
 import arrow from "./arrow_right2.svg";
@@ -60,6 +60,8 @@ import user2 from "./user2.png";
 import clock from "./clock.svg";
 import message2 from "./message2.svg";
 import reply2 from "./reply2.svg";
+import clicks from "./clicks.svg";
+import visitEye from "./visit_eye.svg";
 
 const icons = {
   ad,
@@ -127,6 +129,8 @@ const icons = {
   TextMessage: message2,
   phone2,
   location3,
+  clicks,
+  visitEye,
 };
 
 export default icons;
