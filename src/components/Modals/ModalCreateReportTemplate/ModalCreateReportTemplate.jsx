@@ -11,7 +11,7 @@ export default function ModalCreateReportTemplate() {
       .required("Required"),
   });
   return (
-    <div className="flex flex-col px-[33px] pt-[43px] gap-[18px] h-[547px] w-[643px]">
+    <div className="flex flex-col px-[33px] pt-[43px] gap-[18px] h-[477px] w-[643px]">
       <Formik
         initialValues={{ message: "", title: "" }}
         onSubmit={async (values, actions) => {
@@ -26,6 +26,7 @@ export default function ModalCreateReportTemplate() {
               <Field
                 type="text"
                 name="title"
+                onChange={handleChange}
                 className="py-[14px] pl-[26px] border border-light-100 placeholder:font-semibold w-full rounded-[20px] mb-[22px]"
                 placeholder="Add Report template Title"
               />
@@ -54,8 +55,10 @@ export default function ModalCreateReportTemplate() {
                   </label>
                 </div>
               </div>
-              <div className="flex items-center justify-end mt-2">
-                <button className="_btn-blue">Create</button>
+              <div className="flex items-center justify-end mt-4">
+                <button type="submit" className="_btn-blue">
+                  Create
+                </button>
               </div>
             </div>
           </Form>

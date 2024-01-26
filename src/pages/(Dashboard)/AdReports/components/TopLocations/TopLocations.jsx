@@ -2,19 +2,35 @@ import { useMemo, useState } from "react";
 import SelectChart from "@components/SelectChart";
 import BoxSkeleton from "@skeleton/BoxSkeleton";
 import AnimBox from "@animation/AnimBox";
-import { faker } from "@faker-js/faker";
 import useTripsData from "@hooks/useTripsData";
 import Icon from "@components/Icon";
 import CloseButton from "@components/CloseButton";
 import LocationReportChartBox from "../LocationReportChartBox";
 import useCustomerInfoData from "@hooks/useCustomerInfoData";
+import SearchBox from "@components/SearchBox";
+import ModalSearchArea from "../ModalSearchArea/ModalSearchArea";
 
-export default function TopLocations({ isPending = false }) {
+export default function TopLocations() {
   const [dataMode, setDataMode] = useState("monthlyData");
+  const [searchArea, setSearchArea] = useState("");
+  const [isActiveModalChart, setIsActiveModalChart] = useState(false);
+
+  function handlerActiveModal() {
+    setIsActiveModalChart(!isActiveModalChart);
+  }
 
   const [activeModal, setActiveModal] = useState(false);
   function handlerModal(id = false) {
     setActiveModal(id);
+  }
+
+  function handlerChange(value) {
+    setSearchArea(value);
+  }
+
+  function handlerSubmit() {
+    handlerActiveModal();
+    console.log(searchArea);
   }
 
   const {
@@ -62,7 +78,10 @@ export default function TopLocations({ isPending = false }) {
       <div className="flex flex-col justify-between">
         <div className="flex flex-row justify-between items-center mb-6 py-3 pl-[25px] pr-[15px] rounded-t-3xl text-white bg-text">
           <span className="font-semibold">Top Performing Locations</span>
-          <button disabled={isPending} onClick={() => handlerModal(true)}>
+          <button
+            disabled={customersInfoPending}
+            onClick={() => handlerModal(true)}
+          >
             <Icon name="expand" className="" />
           </button>
         </div>
@@ -88,10 +107,18 @@ export default function TopLocations({ isPending = false }) {
               <CloseButton closeFn={() => handlerModal(false)} />
             </div>
           </div>
-
           {customersInfoData && (
             <div className="p-[15px]">
-              <div className="mb-6">
+              <div className="mb-6 flex items-center justify-between">
+                <SearchBox
+                  searchBoxHandler={{
+                    searchInput: searchArea,
+                    handlerChange: handlerChange,
+                    handlerSubmit: handlerSubmit,
+                    placeHolder: "Search Area",
+                    className: "py-2",
+                  }}
+                />
                 <SelectChart
                   mode={dataMode}
                   handlerDataMode={handlerDataMode}
@@ -108,6 +135,19 @@ export default function TopLocations({ isPending = false }) {
           )}
         </div>
       </AnimBox>
+      {customersInfoPending || customersInfoError ? null : (
+        <AnimBox
+          y={200}
+          time={8}
+          isOpen={isActiveModalChart}
+          className="fixed top-[100px] shadow-boo-1 right-[860px] z-20"
+        >
+          <ModalSearchArea
+            handlerActiveModal={handlerActiveModal}
+            locationItem={topLocationList[0]}
+          />
+        </AnimBox>
+      )}
     </div>
   );
 }

@@ -5,6 +5,12 @@ export default function SearchBoxFilter({ searchBoxHandler }) {
   const { searchInput, handlerChange, handlerSubmit, placeHolder, className } =
     searchBoxHandler;
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handlerSubmit();
+    }
+  };
+
   return (
     <label
       htmlFor="searchMenuFilters"
@@ -13,9 +19,18 @@ export default function SearchBoxFilter({ searchBoxHandler }) {
         className
       )}
     >
-      <button onClick={() => handlerSubmit()}>
-        <Icon name="search2" className="w-3 h-3" />
-      </button>
+      {!searchInput ? (
+        <button>
+          <Icon name="search2" className="w-3 h-3" />
+        </button>
+      ) : (
+        <button
+          onClick={() => handlerChange("")}
+          className={twMerge("relative w-3 h-3 ", searchInput && "opacity-100")}
+        >
+          <Icon name="close" className="absoulute w-3 h-3" />
+        </button>
+      )}
       <input
         type="search"
         name=""
@@ -26,17 +41,8 @@ export default function SearchBoxFilter({ searchBoxHandler }) {
         onChange={(e) => {
           handlerChange(e.target.value);
         }}
+        onKeyDown={handleKeyDown}
       />
-
-      <button
-        onClick={() => handlerChange("")}
-        className={twMerge(
-          " absolute p-1 rounded-full w-7 h-7 bg-text-softGary right-2 opacity-0",
-          searchInput && "opacity-100"
-        )}
-      >
-        <Icon name="close" className="" />
-      </button>
     </label>
   );
 }

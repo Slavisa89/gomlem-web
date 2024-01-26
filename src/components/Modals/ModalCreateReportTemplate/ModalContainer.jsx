@@ -14,7 +14,7 @@ export default function ModalContainer({ handlerActiveModal, activeModal }) {
         <div className="z-20 flex flex-col font-semibold bg-white rounded-3xl">
           <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
             <div className="flex items-center gap-2">
-              <span>Modal Create Report Template</span>
+              <span>Create Ad Report Template</span>
             </div>
             <div className="flex gap-2">
               <CloseButton closeFn={handlerActiveModal} />

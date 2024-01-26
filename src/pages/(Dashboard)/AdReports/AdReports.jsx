@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Statistics from "@components/Statistics";
 import TopLocations from "./components/TopLocations";
 import { StatusBoxContainer } from "./components/StatusBoxContainer/StatusBoxContainer";

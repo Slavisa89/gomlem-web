@@ -20,7 +20,7 @@ export default function ModalAdReportsSettings() {
   }
 
   return (
-    <div className="px-[22px] py-6 pl-9 bg-white w-[393px] h-[550px] rounded-b-[20px] overflow-y-scroll">
+    <div className="px-[22px] py-3 pl-9 bg-white w-[393px] h-[300px] rounded-b-[20px] overflow-y-scroll">
       <ul className="flex flex-col gap-5 text-sm font-normal">
         <li>
           <div className="mt-4">
@@ -48,7 +48,7 @@ export default function ModalAdReportsSettings() {
         <li>
           <span className="font-semibold">Ad Report Templates</span>
           <div className="flex items-center gap-2 mt-[14px]">
-            <button className="p-[10px] rounded-full text-white text-[10px] font-normal bg-blue">
+            <button className="py-[7px] px-[20px] rounded-full text-white text-[10px] font-normal bg-blue">
               Template 1
             </button>
             <button
