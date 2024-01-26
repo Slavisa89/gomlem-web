@@ -80,7 +80,8 @@ export default function TopLocations() {
           <span className="font-semibold">Top Performing Locations</span>
           <button
             disabled={customersInfoPending}
-            onClick={() => handlerModal(true)}>
+            onClick={() => handlerModal(true)}
+          >
             <Icon name="expand" className="" />
           </button>
         </div>
@@ -97,7 +98,8 @@ export default function TopLocations() {
         y={200}
         time={8}
         isOpen={activeModal}
-        className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[783px]">
+        className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[783px]"
+      >
         <div className="flex flex-col font-semibold bg-white rounded-3xl">
           <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
             <span>Top Performing Locations</span>
@@ -138,7 +140,8 @@ export default function TopLocations() {
           y={200}
           time={8}
           isOpen={isActiveModalChart}
-          className="fixed top-[100px] shadow-boo-1 right-[860px] z-20">
+          className="fixed top-[100px] shadow-boo-1 right-[860px] z-20"
+        >
           <ModalSearchArea
             handlerActiveModal={handlerActiveModal}
             locationItem={topLocationList[0]}

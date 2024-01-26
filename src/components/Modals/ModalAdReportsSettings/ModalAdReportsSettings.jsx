@@ -48,7 +48,7 @@ export default function ModalAdReportsSettings() {
         <li>
           <span className="font-semibold">Ad Report Templates</span>
           <div className="flex items-center gap-2 mt-[14px]">
-            <button className="p-[10px] rounded-full text-white text-[10px] font-normal bg-blue">
+            <button className="py-[7px] px-[20px] rounded-full text-white text-[10px] font-normal bg-blue">
               Template 1
             </button>
             <button
@@ -58,7 +58,8 @@ export default function ModalAdReportsSettings() {
                   modalName: "Modal Create Report Template",
                   category: "Medium",
                 })
-              }>
+              }
+            >
               <Icon name="add" className="w-[10px] h-[10px]" />
               <span>Create Report Template</span>
             </button>

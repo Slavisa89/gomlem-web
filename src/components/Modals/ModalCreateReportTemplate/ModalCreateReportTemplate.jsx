@@ -19,20 +19,22 @@ export default function ModalCreateReportTemplate() {
           actions.setSubmitting(false);
         }}
         validationSchema={sendEmailValidation}
-        className="mt-5">
+        className="mt-5"
+      >
         {({ errors, touched, values, handleChange }) => (
           <Form>
             <div className="gorw">
               <Field
                 type="text"
                 name="title"
+                onChange={handleChange}
                 className="py-[14px] pl-[26px] border border-light-100 placeholder:font-semibold w-full rounded-[20px] mb-[22px]"
                 placeholder="Add Report template Title"
               />
               <div className="relative border rounded-[20px]">
                 <textarea
                   className={twMerge(
-                    "h-[210px] focus-within:outline-none my-3 pl-[19px] pr-1 text-sm text-text-lighter font-normal placeholder:text-text-lighter placeholder:font-normal",
+                    "h-[210px] focus-within:outline-none my-3 pl-[19px] pr-1 text-sm text-text-lighter font-normal placeholder:text-text-lighter placeholder:font-normal"
                   )}
                   name="message"
                   value={values.message}
@@ -41,7 +43,8 @@ export default function ModalCreateReportTemplate() {
                   style={{
                     width: "-webkit-fill-available",
                     resize: "none",
-                  }}></textarea>
+                  }}
+                ></textarea>
                 <div className="flex gap-4 pl-[19px] pb-[19px]">
                   <Icon name="link" />
                   <label htmlFor="inputPicture">
@@ -55,7 +58,9 @@ export default function ModalCreateReportTemplate() {
                 </div>
               </div>
               <div className="flex items-center justify-end mt-2">
-                <button className="_btn-blue">Create</button>
+                <button type="submit" className="_btn-blue">
+                  Create
+                </button>
               </div>
             </div>
           </Form>
