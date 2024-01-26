@@ -25,7 +25,6 @@ export default function SearchBoxFilter({ searchBoxHandler }) {
         onChange={(e) => {
           handlerChange(e.target.value);
         }}
-        onKeyDown={handlerSubmit}
       />
 
       <button

@@ -8,7 +8,7 @@ import CloseButton from "@components/CloseButton";
 import LocationReportChartBox from "../LocationReportChartBox";
 import useCustomerInfoData from "@hooks/useCustomerInfoData";
 import SearchBox from "@components/SearchBox";
-import ModalChart from "@components/NewCustomersChart/ModalChart";
+import ModalSearchArea from "../ModalSearchArea/ModalSearchArea";
 
 export default function TopLocations() {
   const [dataMode, setDataMode] = useState("monthlyData");
@@ -139,10 +139,10 @@ export default function TopLocations() {
           y={200}
           time={8}
           isOpen={isActiveModalChart}
-          className="fixed bottom-14 shadow-boo-1 right-[70px] z-20">
-          <ModalChart
+          className="fixed top-14 shadow-boo-1 right-[860px] z-20">
+          <ModalSearchArea
             handlerActiveModal={handlerActiveModal}
-            dataChart={customersInfoData.newCustomersChartsData}
+            locationItem={topLocationList[0]}
           />
         </AnimBox>
       )}
