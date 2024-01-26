@@ -105,7 +105,6 @@ export default function TopLocations() {
               <CloseButton closeFn={() => handlerModal(false)} />
             </div>
           </div>
-
           {customersInfoData && (
             <div className="p-[15px]">
               <div className="mb-6 flex items-center justify-between">
@@ -139,7 +138,7 @@ export default function TopLocations() {
           y={200}
           time={8}
           isOpen={isActiveModalChart}
-          className="fixed top-14 shadow-boo-1 right-[860px] z-20">
+          className="fixed top-[100px] shadow-boo-1 right-[860px] z-20">
           <ModalSearchArea
             handlerActiveModal={handlerActiveModal}
             locationItem={topLocationList[0]}
