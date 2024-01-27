@@ -2,6 +2,7 @@ import React from "react";
 import StatusBoxContainer from "./components/StatusBoxContainer";
 import Statistics from "@components/Statistics";
 import TopPerformingLocations from "./components/TopPerformingLocations";
+import ContainerTable from "../../../components/ContainerTable";
 
 export default function AppPayments() {
   return (
@@ -10,7 +11,7 @@ export default function AppPayments() {
         <main className="w-[70%]">
           <StatusBoxContainer />
           <Statistics />
-          {/* <TableAdReports /> */}
+          <ContainerTable />
         </main>
         <aside className="w-[30%]">
           <TopPerformingLocations />
