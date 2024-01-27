@@ -51,6 +51,11 @@ export default function TopLocations() {
     setDataMode(data);
   }
 
+  function handleCloseModals() {
+    setIsActiveModalChart(false);
+    handlerModal(false);
+  }
+
   const topLocationList = useMemo(() => {
     return customersInfoData
       ? [
@@ -94,60 +99,64 @@ export default function TopLocations() {
           <LocationReportChartBox key={i} locationItem={locationItem} />
         ))
       )}
-      <AnimBox
-        y={200}
-        time={8}
-        isOpen={activeModal}
-        className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[783px]"
-      >
-        <div className="flex flex-col font-semibold bg-white rounded-3xl">
-          <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
-            <span>Top Performing Locations</span>
-            <div className="flex gap-2">
-              <CloseButton closeFn={() => handlerModal(false)} />
-            </div>
-          </div>
-          {customersInfoData && (
-            <div className="p-[15px]">
-              <div className="mb-6 flex items-center justify-between">
-                <SearchBox
-                  searchBoxHandler={{
-                    searchInput: searchArea,
-                    handlerChange: handlerChange,
-                    handlerSubmit: handlerSubmit,
-                    placeHolder: "Search Area",
-                    className: "py-2",
-                  }}
-                />
-                <SelectChart
-                  mode={dataMode}
-                  handlerDataMode={handlerDataMode}
-                />
-              </div>
-              <div className="row grid grid-cols-2 gap-[10px]">
-                {topLocationList.map((locationItem, i) => (
-                  <div key={i}>
-                    <LocationReportChartBox locationItem={locationItem} />
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </div>
-      </AnimBox>
-      {customersInfoPending || customersInfoError ? null : (
+      <div className="fixed bottom-14 right-[40px] z-20 flex">
         <AnimBox
           y={200}
           time={8}
-          isOpen={isActiveModalChart}
-          className="fixed top-[100px] shadow-boo-1 right-[860px] z-20"
+          isOpen={activeModal}
+          className="relative shadow-boo-1 right-[0px] w-[783px]"
         >
-          <ModalSearchArea
-            handlerActiveModal={handlerActiveModal}
-            locationItem={topLocationList[0]}
-          />
+          <div className="flex flex-col font-semibold bg-white rounded-3xl">
+            <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
+              <span>Top Performing Locations</span>
+              <div className="flex gap-2">
+                <CloseButton closeFn={handleCloseModals} />
+              </div>
+            </div>
+            {customersInfoData && (
+              <div className="p-[15px]">
+                <div className="mb-6 flex items-center justify-between">
+                  <SearchBox
+                    searchBoxHandler={{
+                      searchInput: searchArea,
+                      handlerChange: handlerChange,
+                      handlerSubmit: handlerSubmit,
+                      placeHolder: "Search Area",
+                      className: "py-2",
+                    }}
+                  />
+                  <SelectChart
+                    mode={dataMode}
+                    handlerDataMode={handlerDataMode}
+                  />
+                </div>
+                <div className="row grid grid-cols-2 gap-[10px]">
+                  {topLocationList.map((locationItem, i) => (
+                    <div key={i}>
+                      <LocationReportChartBox locationItem={locationItem} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </AnimBox>
-      )}
+        {customersInfoPending || customersInfoError ? null : (
+          <div className="!-translate-x-full absolute top-[0px] -left-[17px]">
+            <AnimBox
+              y={200}
+              time={8}
+              isOpen={isActiveModalChart}
+              className="relative top-[0px] shadow-boo-1 left-[0px] z-20"
+            >
+              <ModalSearchArea
+                handlerActiveModal={handlerActiveModal}
+                locationItem={topLocationList[0]}
+              />
+            </AnimBox>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
