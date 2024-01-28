@@ -1,6 +1,5 @@
-import IconArrow from "@assets/icons/arrow_right2.svg";
 import { twMerge } from "tailwind-merge";
-import { Link } from "react-router-dom";
+import { capitalizeFirstLetter } from "@services/utils/string-helper";
 
 export default function DataTypesToggle({
   typeList,
@@ -19,19 +18,11 @@ export default function DataTypesToggle({
                 typeItem === selectedType && "active",
               )}
               onClick={() => handleType(typeItem)}>
-              {typeItem}
+              {capitalizeFirstLetter(typeItem)}
             </button>
           );
         })}
       </div>
-      {
-        <Link
-          to={selectedType == "appPayment" ? "/app-payments" : "/ad-reports"}
-          className="flex gap-[13px] text-text-lighter font-semibold items-center">
-          <span>View All</span>
-          <img src={IconArrow} className="w-[14px] h-[18px]" />
-        </Link>
-      }
     </div>
   );
 }

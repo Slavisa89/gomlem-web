@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { alertError } from "@services/scripts/scripts";
-import { fakeDataAppPayments } from "../services/utils/dummydata";
+import { fakeDataAppPayments } from "@services/utils/dummydata";
 
 export default function useTableAppPaymens() {
   const { isPending, data, error, isError } = useQuery({

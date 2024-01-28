@@ -1,10 +1,18 @@
 import React, { useState, useMemo } from "react";
 import DataTypesToggle from "./DataTypesToggle";
+import FilterMenu from "@components/FilterMenu/FilterMenu";
+import { Link } from "react-router-dom";
 
 export default function TableAppPayments({ tableData }) {
   const [typeTable, setTypeTable] = useState(Object.keys(tableData)[0]);
+  const [sortBy, setSortBy] = useState("NewToOld");
+
   function handelTypeTable(type) {
     setTypeTable(type);
+  }
+
+  function handlerSortBy(sort) {
+    setSortBy(sort);
   }
 
   const tableHeaderRow = useMemo(() => tableData[typeTable].head, [typeTable]);
@@ -12,11 +20,14 @@ export default function TableAppPayments({ tableData }) {
 
   return (
     <div className="mt-[27px] flex flex-col gap-4">
-      <DataTypesToggle
-        typeList={Object.keys(tableData)}
-        selectedType={typeTable}
-        handleType={handelTypeTable}
-      />
+      <div className="flex justify-between">
+        <DataTypesToggle
+          typeList={Object.keys(tableData)}
+          selectedType={typeTable}
+          handleType={handelTypeTable}
+        />
+        <FilterMenu handlerSortBy={handlerSortBy} />
+      </div>
       <table>
         <thead>
           <tr className="text-left text-[14px] font-normal text-gray-300 rounded-2xl">
@@ -44,8 +55,14 @@ export default function TableAppPayments({ tableData }) {
                 <td>{date}</td>
                 <td>{amountSpent}</td>
                 <td>{totalMonthsPaid} months</td>
-                <td>{amountSpent}</td>
-                <td>Test test</td>
+                <td className="text-blue">{amountSpent}</td>
+                <td>
+                  <Link
+                    to="/customers"
+                    className="flex gap-[12px] text-text-lighter font-normal items-center">
+                    <span>Customer Profile</span>
+                  </Link>
+                </td>
               </tr>
             );
           })}
