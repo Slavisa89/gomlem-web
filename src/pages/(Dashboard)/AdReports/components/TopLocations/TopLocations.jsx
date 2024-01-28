@@ -99,7 +99,10 @@ export default function TopLocations() {
           <LocationReportChartBox key={i} locationItem={locationItem} />
         ))
       )}
-      <div className="fixed bottom-14 right-[40px] z-20 flex">
+      <div
+        style={{ pointerEvents: activeModal ? "auto" : "none" }}
+        className="fixed bottom-14 right-[40px] z-20 flex"
+      >
         <AnimBox
           y={200}
           time={8}
