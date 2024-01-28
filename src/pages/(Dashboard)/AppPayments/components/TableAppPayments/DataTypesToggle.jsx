@@ -1,5 +1,4 @@
 import { twMerge } from "tailwind-merge";
-import { capitalizeFirstLetter } from "@services/utils/string-helper";
 
 export default function DataTypesToggle({
   typeList,
@@ -16,9 +15,10 @@ export default function DataTypesToggle({
               className={twMerge(
                 "_btn-outline",
                 typeItem === selectedType && "active",
+                "capitalize",
               )}
               onClick={() => handleType(typeItem)}>
-              {capitalizeFirstLetter(typeItem)}
+              {typeItem}
             </button>
           );
         })}
