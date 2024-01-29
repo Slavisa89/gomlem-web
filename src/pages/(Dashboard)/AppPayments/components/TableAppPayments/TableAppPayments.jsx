@@ -3,16 +3,12 @@ import DataTypesToggle from "./DataTypesToggle";
 import FilterMenu from "@components/FilterMenu/FilterMenu";
 import { Link } from "react-router-dom";
 
-export default function TableAppPayments({ tableData }) {
+export default function TableAppPayments({ tableData, state, handlerSortBy }) {
   const [typeTable, setTypeTable] = useState(Object.keys(tableData)[0]);
-  const [sortBy, setSortBy] = useState("NewToOld");
+  const [sortBy, setSortBy] = useState(state);
 
   function handelTypeTable(type) {
     setTypeTable(type);
-  }
-
-  function handlerSortBy(sort) {
-    setSortBy(sort);
   }
 
   const tableHeaderRow = useMemo(() => tableData[typeTable].head, [typeTable]);
@@ -36,12 +32,11 @@ export default function TableAppPayments({ tableData }) {
             ))}
           </tr>
         </thead>
-        <div className="m-6"></div>
         <tbody className="text-xs font-normal text-gray-600">
-          {tableRecords.map((recordItem) => {
+          {tableRecords.map((recordItem, i) => {
             const { userName, amountSpent, totalMonthsPaid, date } = recordItem;
             return (
-              <tr>
+              <tr key={i}>
                 <td>
                   <div className="flex flex-row items-center gap-2 py-2 px-0">
                     <img

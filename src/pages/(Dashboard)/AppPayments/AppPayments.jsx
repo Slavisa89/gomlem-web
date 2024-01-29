@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useReducer } from "react";
 import StatusBoxContainer from "./components/StatusBoxContainer";
 import Statistics from "@components/Statistics";
 import TopPerformingLocations from "./components/TopPerformingLocations";
-import useTableAppPaymens from "../../../hooks/useTableAppPayments";
+import useAppPaymentsTable from "@hooks/useAppPaymentsTable";
 import TableAppPayments from "./components/TableAppPayments/TableAppPayments";
+import { cleanObj } from "@/script/script";
+import {
+  ACTIONS,
+  initialArg,
+  reducerParam,
+} from "@services/utils/reducerParam";
 
 export default function AppPayments() {
-  const { data: tableDataAppPayments, isPending } = useTableAppPaymens();
+  const [state, dispatch] = useReducer(reducerParam, initialArg);
+
+  const { data, isPending } = useAppPaymentsTable(cleanObj(state));
+
+  // change sort filter
+  function handlerSortBy(sortOrder) {
+    if (sortOrder == state.SortOrder) return;
+    dispatch({
+      type: ACTIONS.SET_SORT_ORDER,
+      payload: { SortOrder: sortOrder },
+    });
+  }
 
   return (
     <div className="overflow-y-scroll h-[calc(100vh-112px)]">
@@ -14,7 +31,13 @@ export default function AppPayments() {
         <main className="w-[70%]">
           <StatusBoxContainer />
           <Statistics />
-          {!isPending && <TableAppPayments tableData={tableDataAppPayments} />}
+          {!isPending && (
+            <TableAppPayments
+              tableData={data}
+              state={state}
+              handlerSortBy={handlerSortBy}
+            />
+          )}
         </main>
         <aside className="w-[30%]">
           <TopPerformingLocations />

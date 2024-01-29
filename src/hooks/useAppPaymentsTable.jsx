@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { alertError } from "@services/scripts/scripts";
 import { fakeDataAppPayments } from "@services/utils/dummydata";
+import { appPaymentsTableData } from "@services/api/admin";
 
-export default function useTableAppPaymens() {
+export default function useAppPaymentsTable(param) {
   const { isPending, data, error, isError } = useQuery({
-    queryKey: ["app-payment"],
+    queryKey: ["useAppPaymentsTable", param],
     queryFn: async () => {
       try {
-        // TODO: put correct api service here to fetch app payments data
-        return fakeDataAppPayments.TABLE_DATA;
+        // const {data} = await appPaymentsTableData(param)
+        const data = fakeDataAppPayments.TABLE_DATA;
+        return data;
       } catch (error) {
         const { response } = error;
         alertError(response);
