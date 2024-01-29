@@ -11,11 +11,13 @@ export default function AdReports() {
         <main className="w-[70%]">
           <StatusBoxContainer />
           <Statistics />
-          <TableAdReports />
         </main>
         <aside className="w-[30%]">
           <TopLocations />
         </aside>
+      </div>
+      <div className="px-8">
+        <TableAdReports />
       </div>
     </div>
   );

@@ -3,7 +3,11 @@ import SelectChart from "@components/SelectChart";
 import Icon from "@components/Icon";
 import PerformLocationItem from "./PerformLocationItem";
 
-export default function LocationTable({ locationType, isPending = false }) {
+export default function LocationTable({
+  locationType,
+  isPending = false,
+  handleModal,
+}) {
   const [dataMode, setDataMode] = useState("monthlyData");
 
   function handlerDataMode(data) {
@@ -17,7 +21,9 @@ export default function LocationTable({ locationType, isPending = false }) {
           <span className="font-semibold">
             Top Performing Locations ({locationType})
           </span>
-          <button disabled={isPending} onClick={() => handlerModal(true)}>
+          <button
+            disabled={isPending}
+            onClick={() => handleModal(locationType)}>
             <Icon name="expand" className="" />
           </button>
         </div>
@@ -38,39 +44,7 @@ export default function LocationTable({ locationType, isPending = false }) {
               <LocationReportChartBox key={i} locationItem={locationItem} />
             ))
           )} */}
-      {/* <AnimBox
-            y={200}
-            time={8}
-            isOpen={activeModal}
-            className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[783px]"
-          >
-            <div className="flex flex-col font-semibold bg-white rounded-3xl">
-              <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
-                <span>Top Performing Locations</span>
-                <div className="flex gap-2">
-                  <CloseButton closeFn={() => handlerModal(false)} />
-                </div>
-              </div>
-    
-              {customersInfoData && (
-                <div className="p-[15px]">
-                  <div className="mb-6">
-                    <SelectChart
-                      mode={dataMode}
-                      handlerDataMode={handlerDataMode}
-                    />
-                  </div>
-                  <div className="row grid grid-cols-2 gap-[10px]">
-                    {topLocationList.map((locationItem, i) => (
-                      <div key={i}>
-                        <LocationReportChartBox locationItem={locationItem} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </AnimBox> */}
+      {/*  */}
     </div>
   );
 }

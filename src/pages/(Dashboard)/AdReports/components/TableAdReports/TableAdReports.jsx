@@ -33,7 +33,7 @@ export default function TableAdReports() {
 
   return (
     <>
-      <div className="mt-4 flex items-center mb-4">
+      <div className="flex items-center mb-4">
         <span className="font-semibold text-[28px] mr-6">Advertises</span>
         <SelectTable mode={dataMode} handlerDataMode={handlerDataMode} />
       </div>

@@ -14,12 +14,12 @@ export default function TopLocations() {
   const [dataMode, setDataMode] = useState("monthlyData");
   const [searchArea, setSearchArea] = useState("");
   const [isActiveModalChart, setIsActiveModalChart] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
 
   function handlerActiveModal() {
     setIsActiveModalChart(!isActiveModalChart);
   }
 
-  const [activeModal, setActiveModal] = useState(false);
   function handlerModal(id = false) {
     setActiveModal(id);
   }
@@ -85,8 +85,7 @@ export default function TopLocations() {
           <span className="font-semibold">Top Performing Locations</span>
           <button
             disabled={customersInfoPending}
-            onClick={() => handlerModal(true)}
-          >
+            onClick={() => handlerModal(true)}>
             <Icon name="expand" className="" />
           </button>
         </div>
@@ -101,14 +100,12 @@ export default function TopLocations() {
       )}
       <div
         style={{ pointerEvents: activeModal ? "auto" : "none" }}
-        className="fixed bottom-14 right-[40px] z-20 flex"
-      >
+        className="fixed bottom-14 right-[40px] z-20 flex">
         <AnimBox
           y={200}
           time={8}
           isOpen={activeModal}
-          className="relative shadow-boo-1 right-[0px] w-[783px]"
-        >
+          className="relative shadow-boo-1 right-[0px] w-[783px]">
           <div className="flex flex-col font-semibold bg-white rounded-3xl">
             <div className="flex justify-between py-3 pl-[34px] pr-[17px] rounded-t-3xl text-white items-center bg-text w-full">
               <span>Top Performing Locations</span>
@@ -150,8 +147,7 @@ export default function TopLocations() {
               y={200}
               time={8}
               isOpen={isActiveModalChart}
-              className="relative top-[0px] shadow-boo-1 left-[0px] z-20"
-            >
+              className="relative top-[0px] shadow-boo-1 left-[0px] z-20">
               <ModalSearchArea
                 handlerActiveModal={handlerActiveModal}
                 locationItem={topLocationList[0]}
