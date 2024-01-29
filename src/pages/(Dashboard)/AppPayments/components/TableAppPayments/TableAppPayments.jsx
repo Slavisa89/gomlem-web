@@ -15,7 +15,7 @@ export default function TableAppPayments({ tableData, state, handlerSortBy }) {
   const tableRecords = useMemo(() => tableData[typeTable].record, [typeTable]);
 
   return (
-    <div className="mt-[27px] flex flex-col gap-4">
+    <div className="mt-[27px] flex flex-col gap-4 pl-8 pr-8">
       <div className="flex justify-between">
         <DataTypesToggle
           typeList={Object.keys(tableData)}

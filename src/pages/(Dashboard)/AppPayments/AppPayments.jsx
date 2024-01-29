@@ -13,7 +13,6 @@ import {
 
 export default function AppPayments() {
   const [state, dispatch] = useReducer(reducerParam, initialArg);
-
   const { data, isPending } = useAppPaymentsTable(cleanObj(state));
 
   // change sort filter
@@ -31,18 +30,18 @@ export default function AppPayments() {
         <main className="w-[70%]">
           <StatusBoxContainer />
           <Statistics />
-          {!isPending && (
-            <TableAppPayments
-              tableData={data}
-              state={state}
-              handlerSortBy={handlerSortBy}
-            />
-          )}
         </main>
         <aside className="w-[30%]">
           <TopPerformingLocations />
         </aside>
       </div>
+      {!isPending && (
+        <TableAppPayments
+          tableData={data}
+          state={state}
+          handlerSortBy={handlerSortBy}
+        />
+      )}
     </div>
   );
 }
