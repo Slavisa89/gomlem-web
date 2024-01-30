@@ -76,48 +76,50 @@ export default function ModalTopPerformingLocations({
       <div
         style={{ pointerEvents: activeModal ? "auto" : "none" }}
         className="fixed bottom-14 right-[40px] z-20 flex">
-        <AnimBox
-          y={200}
-          time={8}
-          isOpen={showModal}
-          className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[783px]">
-          <div className="flex flex-col font-semibold bg-white rounded-3xl w-full">
-            <div className="flex bg-white rounded-3xl flex-col font-semibold w-full">
-              <div className="flex justify-between py-3 pl-8 pt-[12px] pr-[14px] rounded-t-3xl text-white items-center bg-text">
-                <span>Modal Top Performing Locations ({activeModal})</span>
-                <CloseButton closeFn={handleCloseMainModal} />
-              </div>
-              {customersInfoData && (
-                <div className="p-[15px]">
-                  <div className="mb-6 flex items-center justify-between">
-                    <SearchBox
-                      searchBoxHandler={{
-                        searchInput: searchArea,
-                        handlerChange: handlerChange,
-                        handlerSubmit: handlerSubmit,
-                        placeHolder: "Search Area",
-                        className: "py-2",
-                      }}
-                    />
-                    <SelectChart
-                      mode={dataMode}
-                      handlerDataMode={setDataMode}
-                    />
-                  </div>
-                  <div className="row grid grid-cols-2 gap-[10px]">
-                    {topLocationList.map((locationItem, i) => (
-                      <div key={i}>
-                        <LocationCharts locationItem={locationItem} />
-                      </div>
-                    ))}
-                  </div>
+        {showModal && (
+          <AnimBox
+            y={200}
+            time={8}
+            isOpen={showModal}
+            className="fixed bottom-14 shadow-boo-1 right-[70px] z-20 w-[783px]">
+            <div className="flex flex-col font-semibold bg-white rounded-3xl w-full">
+              <div className="flex bg-white rounded-3xl flex-col font-semibold w-full">
+                <div className="flex justify-between py-3 pl-8 pt-[12px] pr-[14px] rounded-t-3xl text-white items-center bg-text">
+                  <span>Modal Top Performing Locations ({activeModal})</span>
+                  <CloseButton closeFn={handleCloseMainModal} />
                 </div>
-              )}
+                {customersInfoData && (
+                  <div className="p-[15px]">
+                    <div className="mb-6 flex items-center justify-between">
+                      <SearchBox
+                        searchBoxHandler={{
+                          searchInput: searchArea,
+                          handlerChange: handlerChange,
+                          handlerSubmit: handlerSubmit,
+                          placeHolder: "Search Area",
+                          className: "py-2",
+                        }}
+                      />
+                      <SelectChart
+                        mode={dataMode}
+                        handlerDataMode={setDataMode}
+                      />
+                    </div>
+                    <div className="row grid grid-cols-2 gap-[10px]">
+                      {topLocationList.map((locationItem, i) => (
+                        <div key={i}>
+                          <LocationCharts locationItem={locationItem} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </AnimBox>
+          </AnimBox>
+        )}
       </div>
-      {customersInfoPending ? null : (
+      {customersInfoPending || !showModal ? null : (
         <div className="!-translate-x-full absolute top-[100px] left-[42rem]">
           <AnimBox
             y={200}

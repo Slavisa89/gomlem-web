@@ -16,7 +16,7 @@ export default function TableAppPayments({ tableData, state, handlerSortBy }) {
 
   return (
     <div className="mt-[27px] flex flex-col gap-4 pl-8 pr-8">
-      <div className="flex justify-between">
+      <div className="flex justify-between mb-4">
         <DataTypesToggle
           typeList={Object.keys(tableData)}
           selectedType={typeTable}
@@ -28,7 +28,9 @@ export default function TableAppPayments({ tableData, state, handlerSortBy }) {
         <thead>
           <tr className="text-left text-[14px] font-normal text-gray-300 rounded-2xl">
             {tableHeaderRow.map((headerItem, i) => (
-              <th key={i}>{headerItem}</th>
+              <th key={i} className="pb-8">
+                {headerItem}
+              </th>
             ))}
           </tr>
         </thead>
