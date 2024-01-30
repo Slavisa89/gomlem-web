@@ -5,6 +5,7 @@ import SelectChart from "@components/SelectChart";
 import AnimBox from "@animation/AnimBox";
 import LocationCharts from "./LocationsCharts";
 import ModalSearchArea from "./ModalSearchArea";
+import useCustomerInfoData from "@hooks/useCustomerInfoData";
 
 const locationItem = {
   name: "Brooklyn",
@@ -15,14 +16,39 @@ const locationItem = {
 export default function ModalTopPerformingLocations({
   activeModal,
   handleModal,
-  locationsData,
-  customersInfoData,
-  dataMode,
-  handlerDataMode,
-  customersInfoPending,
 }) {
   const [searchArea, setSearchArea] = useState("");
   const [openMiniModal, setOpenMiniModal] = useState(false);
+  const [dataMode, setDataMode] = useState("monthlyData");
+
+  const {
+    customersInfoData,
+    customersInfoPending,
+    customersInfoError,
+    // customersInfoMessageError,
+  } = useCustomerInfoData();
+
+  const topLocationList = useMemo(() => {
+    return customersInfoData
+      ? [
+          {
+            name: "Brooklyn",
+            totalAdSpent: "20.000",
+            data: customersInfoData.newCustomersChartsData[dataMode],
+          },
+          {
+            name: "London",
+            totalAdSpent: "10.000",
+            data: customersInfoData.newCustomersChartsData[dataMode],
+          },
+          {
+            name: "Manhattan",
+            totalAdSpent: "15.000",
+            data: customersInfoData.newCustomersChartsData[dataMode],
+          },
+        ]
+      : [];
+  }, [customersInfoData, dataMode]);
 
   useEffect(() => {
     setSearchArea(locationItem.name);
@@ -35,20 +61,15 @@ export default function ModalTopPerformingLocations({
     setOpenMiniModal(true);
   }
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      handlerSubmit();
-    }, 1000);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [searchArea]);
-
   const showModal = useMemo(
     () => activeModal === "Subscriptions" || activeModal === "Trips" || false,
     [activeModal],
   );
+
+  const handleCloseMainModal = () => {
+    handleModal(false);
+    setOpenMiniModal(false);
+  };
 
   return (
     <>
@@ -64,7 +85,7 @@ export default function ModalTopPerformingLocations({
             <div className="flex bg-white rounded-3xl flex-col font-semibold w-full">
               <div className="flex justify-between py-3 pl-8 pt-[12px] pr-[14px] rounded-t-3xl text-white items-center bg-text">
                 <span>Modal Top Performing Locations ({activeModal})</span>
-                <CloseButton closeFn={() => handleModal(false)} />
+                <CloseButton closeFn={handleCloseMainModal} />
               </div>
               {customersInfoData && (
                 <div className="p-[15px]">
@@ -80,11 +101,11 @@ export default function ModalTopPerformingLocations({
                     />
                     <SelectChart
                       mode={dataMode}
-                      handlerDataMode={handlerDataMode}
+                      handlerDataMode={setDataMode}
                     />
                   </div>
                   <div className="row grid grid-cols-2 gap-[10px]">
-                    {locationsData.map((locationItem, i) => (
+                    {topLocationList.map((locationItem, i) => (
                       <div key={i}>
                         <LocationCharts locationItem={locationItem} />
                       </div>
@@ -105,7 +126,7 @@ export default function ModalTopPerformingLocations({
             className="relative top-[0px] shadow-boo-1 left-[0px] z-20">
             <ModalSearchArea
               handlerActiveModal={setOpenMiniModal}
-              locationItem={locationsData[0]}
+              locationItem={topLocationList[0]}
             />
           </AnimBox>
         </div>
