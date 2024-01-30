@@ -1,6 +1,5 @@
-import React, { useState, useMemo, useReducer, useEffect } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import DataTypesToggle from "./DataTypesToggle";
-import FilterMenu from "@components/FilterMenu/FilterMenu";
 import { Link } from "react-router-dom";
 import useAppPaymentsTable from "@hooks/useAppPaymentsTable";
 import { cleanObj } from "@/script/script";
@@ -9,6 +8,7 @@ import {
   initialArg,
   reducerParam,
 } from "@services/utils/reducerParam";
+import FilterMenuAppPayments from "./FilterMenuAppPayments";
 
 export default function TableAppPayments() {
   const [typeTable, setTypeTable] = useState("");
@@ -24,6 +24,7 @@ export default function TableAppPayments() {
 
   // change sort filter
   function handlerSortBy(sortOrder) {
+    event.preventDefault();
     if (sortOrder == state.SortOrder) return;
     dispatch({
       type: ACTIONS.SET_SORT_ORDER,
@@ -45,7 +46,7 @@ export default function TableAppPayments() {
               selectedType={typeTable}
               handleType={handelTypeTable}
             />
-            <FilterMenu handlerSortBy={handlerSortBy} />
+            <FilterMenuAppPayments handlerSortBy={handlerSortBy} />
           </div>
           <table>
             <thead>

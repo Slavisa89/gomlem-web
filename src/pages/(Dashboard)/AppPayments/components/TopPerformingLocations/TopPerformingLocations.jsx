@@ -1,9 +1,5 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import LocationTable from "./LocationTable";
-import SelectChart from "@components/SelectChart";
-import AnimBox from "@animation/AnimBox";
-import CloseButton from "@components/CloseButton";
-import ReportChartBox from "./ReportChart";
 import ModalTopPerformingLocations from "./ModalTopPerformingLocations";
 
 export default function TopPerformingLocations() {
